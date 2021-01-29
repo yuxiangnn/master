@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" /> -->
+    <title>homePage</title>
+</head>
+
+<body>
+    <h1>首页</h1>
+    <button id="btn">发送</button>
+    <button id="btn2">发送2</button>
+    <button id="btn3">发送3</button>
+</body>
+<script src="../../lib/jquery.js"></script>
+<script>
+    $('#btn').click(function() {
+        // var data = {
+        //     "currentPassword": "",
+        //     "loginName": "",
+        //     "inputKey": "",
+        // }
+        // data.loginName = $('input[name="account"]').val()
+        // data.currentPassword = $('input[name="password"]').val()
+        jQuery.support.cors = true;
+        $.ajax({
+            type: "get",
+            crossDomain: true,
+            url: "https://meituan.thexxdd.cn/api/forshop/getprefer",
+            headers: {
+                "content-Type": "application/json;charset=UTF-8",
+                "Accept": "application/json;charset=UTF-8"
+            },
+            dataType: "json",
+            // data: JSON.stringify(
+            //     data
+            // ),
+            success: function(res) {
+                if (res) {
+                    console.log(res)
+                }
+            },
+            error: function(error) {
+                if (error) {
+                    alert('请求失败，请检查网络连接')
+                }
+            }
+        })
+    });
+
+    $('#btn2').click(function() {
+        var data = {
+            "userPassword": "123456",
+            "userAccount": "13661471590",
+            "validateCode": "3M2R",
+            "refCode": "1610270678668",
+            "franchId": "24",
+            "token": "token_99fdb905-c7ba-4205-b0e7-80f130c4dd0c"
+        }
+
+        jQuery.support.cors = true;
+        $.ajax({
+            type: "POST",
+            crossDomain: true,
+            url: "https://servant.lifejingzhi.com/franchiseeservice/fraServer/selectServantByQuerry",
+            headers: {
+                "content-Type": "application/json;charset=UTF-8",
+                "Accept": "application/json;charset=UTF-8"
+            },
+            dataType: "json",
+            data: JSON.stringify(
+                data
+            ),
+            success: function(res) {
+                if (res) {
+                    console.log(res)
+                }
+            },
+            error: function(error) {
+                if (error) {
+                    alert('请求失败，请检查网络连接')
+                }
+            }
+        })
+    })
+
+    $('#btn3').click(function() {
+        var data = {
+            "phone": "15236566121"
+        }
+
+        jQuery.support.cors = true;
+        $.ajax({
+            type: "GET",
+            crossDomain: true,
+            url: "http://127.0.0.1:5500/captcha/sent",
+            // url: "http://localhost:3000/captcha/sent",
+            headers: {
+                "content-Type": "application/json;charset=UTF-8",
+                "Accept": "application/json;charset=UTF-8"
+            },
+            dataType: "json",
+            data: JSON.stringify(
+                data
+            ),
+            success: function(res) {
+                if (res) {
+                    console.log(res)
+                }
+            },
+            error: function(error) {
+                if (error) {
+                    alert('请求失败，请检查网络连接')
+                }
+            }
+        })
+    })
+</script>
+
+</html>

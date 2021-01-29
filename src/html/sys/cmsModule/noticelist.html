@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../../../lib/layui/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+        .title {
+            font-size: 1.25rem;
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #333333;
+            box-sizing: border-box;
+            padding: 0.3rem;
+            position: relative;
+        }
+        
+        .title .toggle {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -9px;
+            cursor: pointer;
+            right: 0.625rem;
+        }
+        
+        .title .toggle span {
+            width: 3.5rem;
+            height: 0.875rem;
+            font-size: 0.875rem;
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #1A59A9;
+            padding-right: 1.25rem;
+            position: relative;
+        }
+        
+        .title span i {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -8px;
+        }
+        
+        .form-less,
+        .form-more {
+            padding: 0.625rem 1rem;
+        }
+        
+        .layui-form-select dl dd.layui-select-tips {
+            display: none;
+        }
+        
+        .tableContent {
+            background: #fff;
+            font-size: 1rem !important;
+            /* padding: 10px 15px; */
+        }
+        
+        .layui-form-item {
+            margin-bottom: 0;
+            display: inline-block;
+            padding-left: 20px;
+        }
+        
+        .layui-form-item .layui-input-inline,
+        .layui-form-item .layui-inline {
+            margin-right: 0;
+            margin-bottom: 0;
+            height: 2.5rem;
+        }
+        
+        .layui-form-item .layui-input-inline {
+            width: 150px;
+        }
+        
+        .layui-form-select .layui-input {
+            background-color: #E7E9EF;
+        }
+        
+        .layui-form-mid {
+            margin-right: 0;
+            line-height: 2.5rem;
+            padding: 0 !important;
+        }
+        
+        .layui-form-item .layui-input-block {
+            margin-left: 80px;
+        }
+        
+        .layui-form-label {
+            height: 2.5rem;
+            line-height: 2.5rem;
+            box-sizing: border-box;
+            padding: 0;
+            text-align: left;
+            padding-left: 10px;
+            background-color: #E7E9EF;
+            font-size: 1rem;
+            font-family: PingFang SC;
+            font-weight: 500;
+            border-radius: 2px
+        }
+        
+        .layui-input-block {
+            min-height: 2.5rem;
+        }
+        
+        .layui-input-block button {
+            width: 5.6875rem;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            background: #1A59A9;
+            /* border-radius: 3px; */
+        }
+        
+        .layui-input {
+            height: 2.5rem;
+            font-size: 1rem;
+        }
+        
+        .layui-input-block .layui-input {
+            width: 150px;
+        }
+        
+        .layui-table-tool {
+            padding: 0;
+            min-height: 3rem;
+            line-height: 2rem;
+        }
+        
+        .layui-table-tool-temp {
+            padding-right: 3.75rem;
+        }
+        
+        .layui-btn-container .btn-group {
+            float: right;
+        }
+        
+        .layui-btn-container .btn-group button {
+            width: 5.6875rem;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            background: #1A59A9;
+            font-weight: 500;
+        }
+        
+        .layui-btn-container .layui-btn {
+            margin: 0;
+        }
+        
+        table thead th {
+            background-color: #1A59A9;
+            color: #fff;
+        }
+        
+        .layui-table-cell {
+            font-size: 1rem;
+        }
+        
+        .layui-laypage {
+            float: right;
+        }
+        
+        .layui-laypage-btn {
+            display: none;
+        }
+        
+        .layui-table-view {
+            margin: 0;
+        }
+        
+        .layui-table-tool-self {
+            top: 4px
+        }
+        
+        .layui-input-inline img {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            margin-top: -11px;
+        }
+        
+        .layui-table-cell {
+            padding: 0 8px;
+        }
+        
+        .layui-form-switch {
+            min-width: 20px;
+        }
+        
+        .layui-form-switch {
+            min-width: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <p>查询条件</p>
+        <div class="toggle">
+            <span>更多条件<i class="layui-icon" id="more" style="display: none;">&#xe619;</i><i class="layui-icon" id="less" >&#xe61a;</i>
+            </span>
+        </div>
+    </div>
+    <div class="form-less">
+        <form class="layui-form">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <select id="select2">
+                                <option disabled selected value></option>
+                                <option value="0">标准</option>
+                                <option value="1">类别</option>
+                                <option value="2">状态</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" id="input2">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 80px;">时间范围</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" id="lesstime_min" name="time_min" class="layui-input">
+                                    <img onclick="WdatePicker({el:'lesstime_min'})" src="../../../lib/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+                                </div>
+                                <div class="layui-form-mid" style="width: 10px;">--</div>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="lesstime_max" name="time_max" class="layui-input">
+                                    <img onclick="WdatePicker({el:'lesstime_max'})" src="../../../lib/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="search-less">查询</button>
+                            <button type="reset" class="layui-btn layui-btn-primary" style="background-color: #fff;">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="form-more" style="display: none;">
+        <form class="layui-form">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;line-height: 27px;text-align: center;">标准：
+                            <!-- <select id="select1">
+                                <option disabled selected value></option>
+                                <option value="0">角色</option>
+                            </select> -->
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" id="input1">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;line-height: 27px;text-align: center;">类别：
+                            <!-- <select id="select1">
+                                <option disabled selected value></option>
+                                <option value="0">角色</option>
+                            </select> -->
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" id="input2">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;line-height: 27px;text-align: center;">状态：
+                            <!-- <select id="select1">
+                                            <option disabled selected value></option>
+                                            <option value="0">角色</option>
+                                        </select> -->
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" id="input3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 80px;text-indent: 8px;">时间范围</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" id="moretime_min" name="moretime_min" class="layui-input">
+                                    <img onclick="WdatePicker({el:'moretime_min'})" src="../../../lib/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+
+                                </div>
+                                <div class="layui-form-mid" style="width: 10px;">--</div>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="moretime_max" name="moretime_max" class="layui-input">
+                                    <img onclick="WdatePicker({el:'moretime_max'})" src="../../../lib/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="search-more">查询</button>
+                            <button type="reset" class="layui-btn layui-btn-primary" style="background-color: #fff;">重置</button>
+                        </div>
+                    </div>
+                    <!-- <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 80px;text-indent: 8px;">时间范围</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" id="moretime_min" name="moretime_min" class="layui-input">
+                                    <img onclick="WdatePicker({el:'moretime_min'})" src="../../../lib/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+
+                                </div>
+                                <div class="layui-form-mid" style="width: 10px;">--</div>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="moretime_max" name="moretime_max" class="layui-input">
+                                    <img onclick="WdatePicker({el:'moretime_max'})" src="../../../lib/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12" style="text-align: center;">
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button type="button" class="layui-btn" id="search-more">查询</button>
+                                <button type="reset" class="layui-btn layui-btn-primary" style="background-color: #fff;">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        </form>
+        </div>
+    </div>
+
+
+    <div class="tableContent">
+        <table id="list_table" lay-filter="list_table"></table>
+    </div>
+    <script src="../../../lib/jquery1.9.1.min.js"></script>
+    <script src="../../../js/fontsize.js"></script>
+    <script src="../../../lib/layui/layui/layui.js"></script>
+    <script src="../../../lib/html5shiv.js"></script>
+    <script src="../../../lib/respond.js"></script>
+    <script src="../../../lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <div class="title">查询结果
+                <div class="btn-group">
+                    <button type="button" class="layui-btn" id="add">新增</button>
+                    <button type="button" class="layui-btn layui-btn-primary" style="background-color: #fff;" id="delete">删除</button>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="barDemo">
+        <a lay-event="edit"><i class="layui-icon" style="color:#1A59A9; font-size:22px; font-weight:bold">&#xe642;</i></a>
+        <a lay-event="del"><i class="layui-icon" style="color:#F04844; font-size:22px; font-weight:bold">&#x1006;</i></a>
+    </script>
+    <script type="text/html" id="titleTpl">
+        <input type="checkbox" name="switch" lay-skin="switch">
+    </script>
+    <script>
+        var initdata
+        $(function() {
+            //select判断
+            $('select').change(function(e) {
+                var oldvalue = $(this).attr('value');
+                var currentvalue = $(this).val();
+                if (oldvalue) {
+                    $('select option[value=' + oldvalue + ']').show();
+                }
+                $('select option[value=' + currentvalue + ']').hide();
+                $(this).attr('value', currentvalue);
+            });
+            //toggle切换
+            $('.toggle').click(function() {
+                if ($('.form-more').css('display') == 'block') {
+                    $('.form-more').css('display', 'none')
+                    $('.form-less').css('display', 'block')
+                    $('#more').css('display', 'none')
+                    $('#less').css('display', 'block')
+                } else {
+                    $('.form-more').css('display', 'block')
+                    $('.form-less').css('display', 'none')
+                    $('#more').css('display', 'block')
+                    $('#less').css('display', 'none')
+                }
+            })
+
+
+        })
+
+        layui.use(['form', 'layedit', 'laydate', 'table', 'element', 'table'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate,
+                table = layui.table,
+                element = layui.element,
+                table = layui.table;
+
+            //加载初始数据
+            table.render({
+                toolbar: '#toolbarDemo',
+                defaultToolbar: ['filter'],
+                elem: '#list_table',
+                height: 400,
+                cols: [
+                    [ //标题栏
+                        {
+                            type: 'checkbox',
+                            fixed: 'left',
+                            width: "5%"
+                        }, {
+                            title: '操作',
+                            align: 'center',
+                            toolbar: '#barDemo',
+                            width: "10%"
+                        }, {
+                            field: 'on',
+                            title: '启用',
+                            align: 'center',
+                            templet: '#titleTpl',
+                            width: "5%"
+                        }, {
+                            field: 'num',
+                            title: '序号',
+                            width: "5%",
+                            align: 'center',
+                            sort: true
+                        }, {
+                            field: 'standard',
+                            title: '标准',
+                            width: "20%",
+                            align: 'center',
+                            // sort: true
+                        }, {
+                            field: 'category',
+                            title: '类别',
+                            width: "15%",
+                            align: 'center',
+                            // sort: true
+                        }, {
+                            field: 'tpye',
+                            title: '状态',
+                            width: "10%",
+                            align: 'center',
+                            // sort: true
+                        }, {
+                            field: 'views',
+                            title: '浏览次数',
+                            width: "10%",
+                            align: 'center',
+                            // sort: true
+                        }, {
+                            field: 'PublishTime',
+                            title: '发布时间',
+                            width: "20%",
+                            align: 'center',
+                        }
+                    ]
+                ],
+                data: [{
+                    "id": "10001",
+                    "num": "1",
+                    "username": "杜甫",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "116",
+                    "ip": "192.168.0.8",
+                    "logins": "108",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10002",
+                    "num": "1",
+                    "username": "李白",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "12",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14",
+                    "LAY_CHECKED": true
+                }, {
+                    "id": "10003",
+                    "num": "1",
+                    "username": "王勃",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "65",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10004",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "666",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10006",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "12",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10007",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "16",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10008",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "106",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "num": "1",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }],
+                even: true,
+                page: true //是否显示分页
+                    ,
+                limits: [20, 100, 200],
+                limit: 5 //每页默认显示的数量
+            });
+
+
+            //监听复选框批量删除
+            var selectdata = []
+            table.on('checkbox(list_table)', function(obj) {
+                if (obj.checked) {
+                    selectdata.push(obj.data.id)
+                } else {
+                    selectdata.forEach(function(val, idx) {
+                        if (obj.data.id == val) {
+                            selectdata.splice(idx, 1);
+                        }
+                    })
+                }
+            });
+            $('#delete').click(function() {
+                console.log(selectdata)
+            })
+
+            //监听行工具事件
+            table.on('tool(list_table)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+                var data = obj.data, //获得当前行数据
+                    layEvent = obj.event; //获得 lay-event 对应的值
+                if (layEvent === 'del') {
+                    layer.confirm('真的删除行么', function(index) {
+                        obj.del(); //删除对应行（tr）的DOM结构
+                        layer.close(index);
+                        //向服务端发送删除指令
+                    });
+                } else if (layEvent === 'edit') {
+                    layer.msg('编辑操作');
+                }
+            });
+
+            //新增按钮跳转
+            $('#add').click(function() {
+                console.log('aaa')
+                window.location.href = "./adduser.html"
+            })
+
+            //表单查询
+            $('#search-less').click(function() {
+                var a = $('.form-less .layui-form-item input')
+                console.log(a)
+            })
+            $('#search-more').click(function() {
+                var a = $('.form-more .layui-form-item .layui-select-title input')
+                a.each(function(idx, val) {
+                    console.log($(val).val())
+                })
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台模板</title>
+    <link rel="stylesheet" href="../../lib/layui/layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <style>
+        .layui-tab {
+            margin: 0;
+        }
+        
+        .layui-tab-content {
+            box-sizing: border-box;
+        }
+        
+        .layui-tab-item {
+            height: 100%;
+        }
+        
+        .layui-tab {
+            margin: 0;
+            padding-top: 0px;
+        }
+        
+        .layui-tab-title {
+            background: #fff;
+        }
+        
+        .layui-tab-title li {
+            border: 1px solid #eee;
+            border-bottom: none;
+            width: 108px;
+            margin: 0 5px;
+            padding: 0;
+        }
+        
+        .layui-tab-title .layui-this {
+            color: #1e9fff;
+        }
+        
+        .layui-tab-content {
+            padding: 10px 0;
+        }
+        
+        .layui-tab-title .layui-this:after {
+            border-bottom: none;
+        }
+        
+        .layui-tab-title li .layui-tab-close {
+            margin-left: 2px;
+        }
+        
+        .tableContent {
+            height: 100%;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="content">
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（配合layui的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <!-- 组织机构 -->
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;">组织机构</a>
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="./orgModule/orglist" data-id="1" data-title="组织机构列表" href="#" class="site-demo-active" data-type="tabAdd">组织机构列表</a></dd>
+                            <dd><a data-url="./orgModule/userGroupList" data-id="2" data-title="用户组列表" href="#" class="site-demo-active" data-type="tabAdd">用户组列表</a></dd>
+                            <dd><a data-url="./orgModule/adduser" data-id="3" data-title="新增组织结构" href="#" class="site-demo-active" data-type="tabAdd">新增组织结构</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;">用户管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="./userModule/userlist" data-id="4" data-title="用户账号列表" href="#" class="site-demo-active" data-type="tabAdd">用户账号列表</a></dd>
+                            <dd><a data-url="./userModule/adduser" data-id="5" data-title="新增用户" href="#" class="site-demo-active" data-type="tabAdd">新增用户</a></dd>
+                            <dd><a data-url="./userModule/userdisabled" data-id="6" data-title="已停用用户" href="#" class="site-demo-active" data-type="tabAdd">已停用用户</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">管理员管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="./userAdminModule/userlist" data-id="7" data-title="管理员列表" href="#" class="site-demo-active" data-type="tabAdd">管理员列表</a></dd>
+                            <dd><a data-url="./userAdminModule/adduser" data-id="8" data-title="新增管理员" href="#" class="site-demo-active" data-type="tabAdd">新增管理员</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">权限管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="./securityModule/userlist" data-id="9" data-title="角色列表" href="#" class="site-demo-active" data-type="tabAdd">角色列表</a></dd>
+                            <dd><a data-url="./securityModule/adduser" data-id="10" data-title="新增角色" href="#" class="site-demo-active" data-type="tabAdd">新增角色</a></dd>
+                            <dd><a data-url="./securityModule/datalist" data-id="11" data-title="数据策略" href="#" class="site-demo-active" data-type="tabAdd">数据策略</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">信息中心</a>
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="./cmsModule/newslist" data-id="12" data-title="新闻动态" href="#" class="site-demo-active" data-type="tabAdd">新闻动态</a></dd>
+                            <dd><a data-url="./cmsModule/noticelist" data-id="13" data-title="通知公告" href="#" class="site-demo-active" data-type="tabAdd">通知公告</a></dd>
+                            <dd><a data-url="./cmsModule/sectionlist" data-id="14" data-title="栏目管理" href="#" class="site-demo-active" data-type="tabAdd">栏目管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">日志审计</a>
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="./logAuditModule/loginlist" data-id="15" data-title="登录日志" href="#" class="site-demo-active" data-type="tabAdd">登录日志</a></dd>
+                            <dd><a data-url="./logAuditModule/operatelist" data-id="16" data-title="操作日志" href="#" class="site-demo-active" data-type="tabAdd">操作日志</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">索引管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="./indexKeyModule/indexlist" data-id="17" data-title="索引列表" href="#" class="site-demo-active" data-type="tabAdd">索引列表</a></dd>
+                            <dd><a data-url="./indexKeyModule/addindex" data-id="18" data-title="新增索引" href="#" class="site-demo-active" data-type="tabAdd">新增索引</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">其他设置</a>
+                        <dl class="layui-nav-child">
+                            <dd><a data-url="./otherModule/dataDictList" data-id="19" data-title="数据字典" href="#" class="site-demo-active" data-type="tabAdd">数据字典</a></dd>
+                            <dd><a data-url="./otherModule/areaInfoList" data-id="20" data-title="区域设置" href="#" class="site-demo-active" data-type="tabAdd">区域设置</a></dd>
+                            <dd><a data-url="./otherModule/menuInfoList" data-id="21" data-title="菜单列表" href="#" class="site-demo-active" data-type="tabAdd">菜单列表</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">
+            <ul class="layui-tab-title">
+            </ul>
+            <ul class="rightmenu" style="display: none;position: absolute;text-align: center; width: 80px;line-height: 25px; border-radius: 3px; color: #fff; background: #1e9fff;border: 1px solid #eee;">
+                <li data-type="closethis" style="cursor: pointer;">关闭当前</li>
+                <li data-type="closeall" style="cursor: pointer;">关闭所有</li>
+            </ul>
+            <div class="layui-tab-content">
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../../lib/jquery1.9.1.min.js"></script>
+    <script src="../../lib/layui/layui/layui.js"></script>
+    <script src="../../lib/html5shiv.js"></script>
+    <script src="../../lib/respond.js"></script>
+    <script>
+        // $.ajax({
+        // 		url:'',//地址
+        // 		dataType:'json',//数据类型
+        // 		type:'GET',//类型
+        // 		timeout:2000,//超时
+        // 		//请求成功
+        // 		success:function(data,status){
+        // 			//alert(data);
+        // 			//alert(status);
+        // 		},
+        // 		//失败/超时
+        // 		error:function(XMLHttpRequest,textStatus,errorThrown){
+        // 			if(textStatus==='timeout'){
+        // 				alert('請求超時');
+        // 				setTimeout(function(){
+        // 					alert('重新请求');
+        // 				},2000);
+        // 			}
+        // 			//alert(errorThrown);
+        // 		}
+        // 	})
+        // })
+        layui.use('element', function() {
+            var $ = layui.jquery;
+            var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+            //触发事件
+            var active = {
+                //在这里给active绑定几项事件，后面可通过active调用这些事件
+                tabAdd: function(url, id, name) {
+                    //新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值
+                    //关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
+                    element.tabAdd('demo', {
+                        title: name,
+                        content: '<iframe data-frameid="' + id + '" scrolling="auto" frameborder="0" src="' + url + '.html" style="width:100%;height:100%;"></iframe>',
+                        id: id //规定好的id
+                    })
+                    CustomRightClick(id); //给tab绑定右击事件
+                    FrameWH(); //计算ifram层的大小
+                },
+                tabChange: function(id) {
+                    //切换到指定Tab项
+                    element.tabChange('demo', id); //根据传入的id传入到指定的tab项
+                },
+                tabDelete: function(id) {
+                    element.tabDelete("demo", id); //删除
+                },
+                tabDeleteAll: function(ids) { //删除所有
+                    $.each(ids, function(i, item) {
+                        element.tabDelete("demo", item); //ids是一个数组，里面存放了多个id，调用tabDelete方法分别删除
+                    })
+                }
+            };
+
+
+            //当点击有site-demo-active属性的标签时，即左侧菜单栏中内容 ，触发点击事件
+            $('.site-demo-active').on('click', function() {
+                var dataid = $(this);
+
+                //这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
+                if ($(".layui-tab-title li[lay-id]").length <= 0) {
+                    //如果比零小，则直接打开新的tab项
+                    active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));
+                } else {
+                    //否则判断该tab项是否以及存在
+
+                    var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有
+                    $.each($(".layui-tab-title li[lay-id]"), function() {
+                        //如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
+                        if ($(this).attr("lay-id") == dataid.attr("data-id")) {
+                            isData = true;
+                        }
+                    })
+                    if (isData == false) {
+                        //标志为false 新增一个tab项
+                        active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));
+                    }
+                }
+                //最后不管是否新增tab，最后都转到要打开的选项页面上
+                active.tabChange(dataid.attr("data-id"));
+            });
+
+            function CustomRightClick(id) {
+                //取消右键  rightmenu属性开始是隐藏的 ，当右击的时候显示，左击的时候隐藏
+                $('.layui-tab-title li').on('contextmenu', function() {
+                    return false;
+                })
+                $('.layui-tab-title,.layui-tab-title li').click(function() {
+                    $('.rightmenu').hide();
+                });
+                //桌面点击右击 
+                $('.layui-tab-title li').on('contextmenu', function(e) {
+                    var popupmenu = $(".rightmenu");
+                    popupmenu.find("li").attr("data-id", id); //在右键菜单中的标签绑定id属性
+
+                    //判断右侧菜单的位置 
+                    l = ($(document).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
+                    t = ($(document).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
+                    popupmenu.css({
+                        left: l,
+                        top: t
+                    }).show(); //进行绝对定位
+                    //alert("右键菜单")
+                    return false;
+                });
+            }
+
+            $(".rightmenu li").click(function() {
+                //右键菜单中的选项被点击之后，判断type的类型，决定关闭所有还是关闭当前。
+                if ($(this).attr("data-type") == "closethis") {
+                    //如果关闭当前，即根据显示右键菜单时所绑定的id，执行tabDelete
+                    active.tabDelete($(this).attr("data-id"))
+                } else if ($(this).attr("data-type") == "closeall") {
+                    var tabtitle = $(".layui-tab-title li");
+                    var ids = new Array();
+                    $.each(tabtitle, function(i) {
+                            ids[i] = $(this).attr("lay-id");
+                        })
+                        //如果关闭所有 ，即将所有的lay-id放进数组，执行tabDeleteAll
+                    active.tabDeleteAll(ids);
+                }
+
+                $('.rightmenu').hide(); //最后再隐藏右键菜单
+            })
+
+            function FrameWH() {
+                var bodyheight = $('body').css('height').split('px')[0]
+                $('.layui-tab-content').css('height', bodyheight - 41)
+            }
+
+            $(window).resize(function() {
+                FrameWH();
+            })
+
+            $('.layui-side-scroll>ul>li').click(function() {
+                $('.layui-side-scroll>ul>li').each(function(idx, val) {
+                    $(val).removeClass("layui-nav-itemed")
+                })
+                $(this).addClass('layui-nav-itemed')
+            })
+        });
+    </script>
+</body>
+
+</html>

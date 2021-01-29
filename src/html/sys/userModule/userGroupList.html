@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../../../lib/layui/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+        .title {
+            font-size: 1.25rem;
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #333333;
+            box-sizing: border-box;
+            padding: 0.3rem;
+            position: relative;
+        }
+        
+        .title .toggle {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -9px;
+            cursor: pointer;
+            right: 0.625rem;
+        }
+        
+        .title .toggle span {
+            width: 3.5rem;
+            height: 0.875rem;
+            font-size: 0.875rem;
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #1A59A9;
+            padding-right: 1.25rem;
+            position: relative;
+        }
+        
+        .title span i {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -8px;
+        }
+        
+        .form-less,
+        .form-more {
+            padding: 0.625rem 1rem;
+        }
+        
+        .layui-form-select dl dd.layui-select-tips {
+            display: none;
+        }
+        
+        .tableContent {
+            background: #fff;
+            font-size: 1rem !important;
+            /* padding: 10px 15px; */
+        }
+        
+        .layui-form-item {
+            margin-bottom: 0;
+            display: inline-block;
+            padding-left: 20px;
+        }
+        
+        .layui-form-item .layui-input-inline,
+        .layui-form-item .layui-inline {
+            margin-right: 0;
+            margin-bottom: 0;
+            height: 2.5rem;
+        }
+        
+        .layui-form-item .layui-input-inline {
+            width: 150px;
+        }
+        
+        .layui-form-select .layui-input {
+            background-color: #E7E9EF;
+        }
+        
+        .layui-form-mid {
+            margin-right: 0;
+            line-height: 2.5rem;
+            padding: 0 !important;
+        }
+        
+        .layui-form-item .layui-input-block {
+            margin-left: 80px;
+        }
+        
+        .layui-form-label {
+            height: 2.5rem;
+            line-height: 2.5rem;
+            box-sizing: border-box;
+            padding: 0;
+            text-align: left;
+            padding-left: 10px;
+            background-color: #E7E9EF;
+            font-size: 1rem;
+            font-family: PingFang SC;
+            font-weight: 500;
+            border-radius: 2px
+        }
+        
+        .layui-input-block {
+            min-height: 2.5rem;
+        }
+        
+        .layui-input-block button {
+            width: 5.6875rem;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            background: #1A59A9;
+            /* border-radius: 3px; */
+        }
+        
+        .layui-input {
+            height: 2.5rem;
+            font-size: 1rem;
+        }
+        
+        .layui-input-block .layui-input {
+            width: 150px;
+        }
+        
+        .layui-table-tool {
+            padding: 0;
+            min-height: 3rem;
+            line-height: 2rem;
+        }
+        
+        .layui-table-tool-temp {
+            padding-right: 3.75rem;
+        }
+        
+        .layui-btn-container .btn-group {
+            float: right;
+        }
+        
+        .layui-btn-container .btn-group button {
+            width: 5.6875rem;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            background: #1A59A9;
+            font-weight: 500;
+        }
+        
+        .layui-btn-container .layui-btn {
+            margin: 0;
+        }
+        
+        table thead th {
+            background-color: #1A59A9;
+            color: #fff;
+        }
+        
+        .layui-table-cell {
+            font-size: 1rem;
+        }
+        
+        .layui-laypage {
+            float: right;
+        }
+        
+        .layui-laypage-btn {
+            display: none;
+        }
+        
+        .layui-table-view {
+            margin: 0;
+        }
+        
+        .layui-table-tool-self {
+            top: 4px
+        }
+        
+        .layui-input-inline img {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            margin-top: -11px;
+        }
+        
+        .layui-table-cell {
+            padding: 0 8px;
+        }
+        
+        .layui-form-switch {
+            min-width: 20px;
+        }
+        
+        #layui-laypage-1 {
+            position: absolute;
+            right: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <p>查询条件</p>
+    </div>
+    <div class="form-more">
+        <form class="layui-form">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;text-align: center;line-height: 27px;">用户组：
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" name="usergroup">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 80px;">创建时间</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="time_min" class="layui-input">
+                                    <img onclick="WdatePicker({el:'lesstime_min'})" src="../../../lib/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+                                </div>
+                                <div class="layui-form-mid" style="width: 10px;">--</div>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="time_max" class="layui-input">
+                                    <img onclick="WdatePicker({el:'lesstime_max'})" src="../../../lib/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="search">查询</button>
+                            <button type="reset" class="layui-btn layui-btn-primary" style="background-color: #fff;">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+
+    <div class="tableContent">
+        <table id="list_table" lay-filter="list_table"></table>
+        <div class="layui-table-page">
+            <div id="layui-table-page1"></div>
+        </div>
+    </div>
+    <script src="../../../lib/jquery1.9.1.min.js"></script>
+    <script src="../../../js/fontsize.js"></script>
+    <script src="../../../lib/layui/layui/layui.js"></script>
+    <script src="../../../lib/html5shiv.js"></script>
+    <script src="../../../lib/respond.js"></script>
+    <script src="../../../lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <div class="title">查询结果
+                <div class="btn-group">
+                    <button type="button" class="layui-btn" id="add">新增</button>
+                    <button type="button" class="layui-btn layui-btn-primary" style="background-color: #fff;" id="delete">删除</button>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="barDemo">
+        <a lay-event="add"><i class="layui-icon" style="color:#1A59A9; font-size:22px; font-weight:bold">&#xe654;</i></a>
+        <a lay-event="edit"><i class="layui-icon" style="color:#1A59A9; font-size:22px; font-weight:bold">&#xe642;</i></a>
+        <a lay-event="del"><i class="layui-icon" style="color:#F04844; font-size:22px; font-weight:bold">&#x1006;</i></a>
+    </script>
+    <script type="text/html" id="titleTpl">
+        <input type="checkbox" name="switch" lay-skin="switch">
+    </script>
+    <script>
+        $(function() {
+            //toggle切换
+            $('.toggle').click(function() {
+                if ($('.form-more').css('display') == 'block') {
+                    $('.form-more').css('display', 'none')
+                    $('.form-less').css('display', 'block')
+                    $('#more').css('display', 'none')
+                    $('#less').css('display', 'block')
+                } else {
+                    $('.form-more').css('display', 'block')
+                    $('.form-less').css('display', 'none')
+                    $('#more').css('display', 'block')
+                    $('#less').css('display', 'none')
+                }
+            })
+
+
+
+
+            layui.use(['form', 'layedit', 'laydate', 'table', 'element', 'table', 'laypage'], function() {
+                var form = layui.form,
+                    layer = layui.layer,
+                    layedit = layui.layedit,
+                    laydate = layui.laydate,
+                    table = layui.table,
+                    element = layui.element,
+                    table = layui.table;
+                laypage = layui.laypage;
+
+                //页面第一次请求 默认 1页  10条
+                function dataLists(pageNum, numPerPage) {
+                    $.ajax({
+                        type: "post",
+                        url: 'http://192.168.31.224:8701/ump/org/group/findListGroup?current=' + pageNum + '&size=' + numPerPage + '',
+                        dataType: "json",
+                        data: JSON.stringify({
+                            inputKey: "1785569568832389318"
+                        }),
+                        headers: {
+                            "content-Type": "application/json;charset=UTF-8",
+                            "Accept": "application/json;charset=UTF-8"
+                        },
+                        success: function(res) {
+                            if (res) {
+                                console.log(res)
+                                dataList(res) // 数据传到 table组件
+                                page(res) // 数据传到 分页组件
+                            }
+                        }
+                    })
+                }
+                dataLists(1, 10)
+                    //渲染page分页
+                function page(data) {
+                    laypage.render({
+                        elem: 'layui-table-page1', //注意，这里的 page 是 ID，不用加 # 号
+                        count: data.data.total, //数据总数，从服务端得到
+                        limit: data.data.size, // 每页条数
+                        limits: [10, 20, 100, 200],
+                        layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                        jump: function(obj, first) {
+                            //console.log(obj)
+                            //obj包含了当前分页的所有参数，比如：
+                            //console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                            //console.log(obj.limit); //得到每页显示的条数
+
+                            //首次不执行
+                            if (!first) {
+                                //do something
+                                numpage(obj.curr, obj.limit) // 分页点击传参 
+                            }
+                        }
+                    });
+                }
+                // 异步回调请求
+                function numpage(pageNum, numPerPage) {
+                    $.ajax({
+                        type: "post",
+                        url: 'http://192.168.31.224:8701/ump/org/group/findListGroup?current=' + pageNum + '&size=' + numPerPage + '',
+                        dataType: "json",
+                        data: JSON.stringify({
+                            "endTime": "2020-01-08 17:55:32",
+                            "groupName": "",
+                            "inputKey": "1785569568832389318",
+                            "startTime": ""
+                        }),
+                        headers: {
+                            "content-Type": "application/json;charset=UTF-8",
+                            "Accept": "application/json;charset=UTF-8"
+                        },
+                        success: function(res) {
+                            if (res) {
+                                console.log(res)
+                                dataList(res)
+                            }
+                        }
+                    })
+                }
+
+                // 表格渲染
+                function dataList(data) {
+                    table.render({
+                        toolbar: '#toolbarDemo',
+                        defaultToolbar: ['filter'],
+                        elem: '#list_table',
+                        height: 400,
+                        cols: [
+                            [ //标题栏
+                                {
+                                    type: 'checkbox',
+                                    fixed: 'left',
+                                    width: "5%"
+                                }, {
+                                    title: '操作',
+                                    align: 'center',
+                                    toolbar: '#barDemo',
+                                    width: "10%"
+                                }, {
+                                    field: 'on',
+                                    title: '启用',
+                                    align: 'center',
+                                    templet: '#titleTpl',
+                                    width: "10%"
+                                }, {
+                                    field: 'groupName',
+                                    title: '用户组名',
+                                    width: "20%",
+                                    align: 'center',
+                                    sort: true
+                                }, {
+                                    field: 'description',
+                                    title: '备注',
+                                    align: 'center',
+                                    width: "25%"
+                                }, {
+                                    field: 'updatedTime',
+                                    title: '创建时间',
+                                    width: "30%",
+                                    align: 'center',
+                                }
+                            ]
+                        ],
+                        data: data.data.records, // 数据
+                        limit: data.data.size, // 每页条数
+                        //page: true, // 开启分页
+                    });
+                }
+
+                //监听复选框批量删除
+                var selectdata = []
+                table.on('checkbox(list_table)', function(obj) {
+                    if (obj.checked) {
+                        selectdata.push(obj.data.orgGroupUuid)
+                    } else {
+                        selectdata.forEach(function(val, idx) {
+                            if (obj.data.orgGroupUuid == val) {
+                                selectdata.splice(idx, 1);
+                            }
+                        })
+                    }
+                });
+                $('body').on("click", '#delete', function() {
+                    $.ajax({
+                        type: "post",
+                        url: "http://192.168.31.224:8701/ump/org/group/deleteGroupUser",
+                        data: JSON.stringify({
+                            "groupUserIds": selectdata,
+                            "inputKey": "1785569568832389318"
+                        }),
+                        headers: {
+                            "content-Type": "application/json;charset=UTF-8",
+                            "Accept": "application/json;charset=UTF-8"
+                        },
+                        success: function(res) {
+                            if (res) {
+                                dataLists(1, 10)
+                                console.log(res)
+                            }
+                        }
+                    })
+                })
+
+                //监听行工具事件
+                table.on('tool(list_table)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+                    var data = obj.data, //获得当前行数据
+                        layEvent = obj.event; //获得 lay-event 对应的值
+                    if (layEvent === 'del') {
+                        layer.confirm('真的删除行么', function(index) {
+                            obj.del(); //删除对应行（tr）的DOM结构
+                            layer.close(index);
+                            //向服务端发送删除指令
+                        });
+                    } else if (layEvent === 'edit') {
+                        layer.msg('编辑操作');
+                    } else if (layEvent === 'add') {
+                        layer.msg('添加用户');
+                    }
+                });
+
+                //新增按钮跳转
+                $('#add').click(function() {
+                    console.log('aaa')
+                    window.location.href = "./adduser.html"
+                })
+            });
+        })
+    </script>
+</body>
+
+</html>

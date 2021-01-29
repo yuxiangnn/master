@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../../../lib/layui/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+        .title {
+            font-size: 20px;
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #333333;
+            box-sizing: border-box;
+            padding: 10px;
+            position: relative;
+        }
+        
+        .title .toggle {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -9px;
+            cursor: pointer;
+            right: 10px;
+        }
+        
+        .title .toggle span {
+            width: 56px;
+            height: 14px;
+            font-size: 14px;
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #1A59A9;
+            padding-right: 20px;
+            position: relative;
+        }
+        
+        .title span i {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -8px;
+        }
+        
+        .form-less,
+        .form-more {
+            padding: 10px 15px;
+        }
+        
+        .layui-form-select dl dd.layui-select-tips {
+            display: none;
+        }
+        
+        .tableContent {
+            background: #fff;
+            /* padding: 10px 15px; */
+        }
+        
+        .layui-form-item .layui-input-inline {
+            margin-right: 0;
+        }
+        
+        .layui-form-select .layui-input {
+            background-color: #E7E9EF;
+        }
+        
+        .layui-form-item .layui-inline,
+        .layui-form-mid {
+            margin-right: 0;
+        }
+        
+        .layui-form-item .layui-input-block {
+            margin-left: 80px;
+        }
+        
+        .layui-form-label {
+            width: auto;
+            text-align: center;
+            padding: 9px 0;
+            background-color: #E7E9EF;
+        }
+        
+        .layui-input-block button {
+            width: 91px;
+            height: 40px;
+            background: #1A59A9;
+            /* border-radius: 3px; */
+        }
+        
+        .layui-table-tool {
+            padding: 0;
+        }
+        
+        .layui-table-tool-temp {
+            padding-right: 60px;
+        }
+        
+        .layui-btn-container .btn-group {
+            float: right;
+        }
+        
+        .layui-btn-container .btn-group button {
+            width: 91px;
+            background: #1A59A9;
+            height: 26px;
+            line-height: 26px;
+        }
+        
+        .layui-btn-container .layui-btn {
+            margin: 0;
+        }
+        
+        table thead th {
+            background-color: #1A59A9;
+            color: #fff;
+        }
+        
+        .layui-table,
+        .layui-table-view {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <p>查询条件</p>
+        <!-- <div class="toggle">
+            <span>更多条件<i class="layui-icon" id="more" style="display: none;">&#xe619;</i><i class="layui-icon" id="less" >&#xe61a;</i>
+            </span>
+        </div> -->
+    </div>
+    <div class="form-less">
+        <form class="layui-form">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 80px;">用户组名：</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 80px;">执行时间</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline" style="width: 47%;">
+                                    <input type="text" id="lesstime_min" name="time_min" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid" style="width: 6%;">&nbsp;-</div>
+                                <div class="layui-input-inline" style="width: 47%;">
+                                    <input type="text" id="lesstime_max" name="time_max" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" lay-filter="*" lay-submit>查询</button>
+                            <button type="reset" class="layui-btn layui-btn-primary" style="background-color: #fff;">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="form-more" style="display: none;">
+        <form class="layui-form">
+            <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <select name="select1">
+                                    <option disabled selected value></option>
+                                      <option value="0">写作aaaaaaaaaaaaaaaaaaaaaa</option>
+                                      <option value="1">阅读</option>
+                                      <option value="2">游戏</option>
+                                      <option value="3">音乐</option>
+                                      <option value="4">旅行</option>
+                                    </select>
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <select name="select2">
+                                    <option disabled selected value></option>
+                                      <option value="0">写作aaaaaaaaaaaaaaaaaaaaaa</option>
+                                      <option value="1">阅读</option>
+                                      <option value="2">游戏</option>
+                                      <option value="3">音乐</option>
+                                      <option value="4">旅行</option>
+                                    </select>
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <select name="select3">
+                                        <option disabled selected value></option>
+                                          <option value="0">写作aaaaaaaaaaaaaaaaaaaaaa</option>
+                                          <option value="1">阅读</option>
+                                          <option value="2">游戏</option>
+                                          <option value="3">音乐</option>
+                                          <option value="4">旅行</option>
+                                        </select>
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <select name="select4">
+                                            <option disabled selected value></option>
+                                              <option value="0">写作aaaaaaaaaaaaaaaaaaaaaa</option>
+                                              <option value="1">阅读</option>
+                                              <option value="2">游戏</option>
+                                              <option value="3">音乐</option>
+                                              <option value="4">旅行</option>
+                                            </select>
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3 layui-form">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <select name="select5">
+                                                <option disabled selected value></option>
+                                                  <option value="0">写作aaaaaaaaaaaaaaaaaaaaaa</option>
+                                                  <option value="1">阅读</option>
+                                                  <option value="2">游戏</option>
+                                                  <option value="3">音乐</option>
+                                                  <option value="4">旅行</option>
+                                                </select>
+                        </div>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 80px;">范围</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline" style="width: 47%;">
+                                    <input type="text" id="moretime_min" name="moretime_min" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid" style="width: 6%;">&nbsp;-</div>
+                                <div class="layui-input-inline" style="width: 47%;">
+                                    <input type="text" id="moretime_max" name="moretime_max" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" style="text-align: center;">
+                            <button type="button" class="layui-btn" lay-filter="*" lay-submit>查询</button>
+                            <button type="reset" class="layui-btn layui-btn-primary" style="background-color: #fff;">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="tableContent">
+        <table id="demo" lay-filter="list_table"></table>
+    </div>
+    <script src="../../../lib/jquery1.9.1.min.js"></script>
+    <script src="../../../lib/layui/layui/layui.js"></script>
+    <script src="../../../lib/html5shiv.js"></script>
+    <script src="../../../lib/respond.js"></script>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <div class="title">查询结果
+                <div class="btn-group">
+                    <button type="button" class="layui-btn">新增</button>
+                    <button type="button" class="layui-btn layui-btn-primary" style="background-color: #fff;">删除</button>
+
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="barDemo">
+        <a lay-event="detail"><i class="layui-icon" style="color:#1A59A9; font-size:22px; font-weight:bold">&#xe608;</i></a>
+        <a lay-event="edit"><i class="layui-icon" style="color:#1A59A9; font-size:22px; font-weight:bold">&#xe642;</i></a>
+        <a lay-event="del"><i class="layui-icon" style="color:#F04844; font-size:22px; font-weight:bold">&#x1006;</i></a>
+    </script>
+    <script type="text/html" id="titleTpl">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="checkbox" name="switch" lay-skin="switch">
+            </div>
+        </div>
+    </script>
+    <script>
+        $(function() {
+            $('.toggle').click(function() {
+                if ($('.form-more').css('display') == 'block') {
+                    $('.form-more').css('display', 'none')
+                    $('.form-less').css('display', 'block')
+                    $('#more').css('display', 'none')
+                    $('#less').css('display', 'block')
+                } else {
+                    $('.form-more').css('display', 'block')
+                    $('.form-less').css('display', 'none')
+                    $('#more').css('display', 'block')
+                    $('#less').css('display', 'none')
+                }
+                console.log($('.form-more').css('display'))
+            })
+        })
+        layui.use(['form', 'layedit', 'laydate', 'table', 'element', 'table'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate,
+                table = layui.table,
+                element = layui.element;
+            table = layui.table;
+
+            table.render({
+                toolbar: '#toolbarDemo',
+                defaultToolbar: [],
+                elem: '#demo',
+                cols: [
+                    [ //标题栏
+                        {
+                            type: 'checkbox',
+                            fixed: 'left'
+                        }, {
+                            field: 'operate',
+                            title: '操作',
+                            align: 'center',
+                            toolbar: '#barDemo',
+                            minWidth: 160
+                        }, {
+                            field: 'on',
+                            title: '启用',
+                            minWidth: 160,
+                            templet: '#titleTpl'
+                        }, {
+                            field: 'id',
+                            title: '序号',
+                            width: 80,
+                            sort: true
+                        }, {
+                            field: 'name',
+                            title: '姓名',
+                            width: 120
+                        }, {
+                            field: 'login_name',
+                            title: '登录名',
+                            minWidth: 150,
+                        }, {
+                            field: 'role',
+                            title: '所属角色',
+                            minWidth: 160
+                        }, {
+                            field: 'aprtment',
+                            title: '部门',
+                            minWidth: 160
+                        }, {
+                            field: 'jobs',
+                            title: '职务',
+                            minWidth: 160
+                        }
+                    ]
+                ],
+                data: [{
+                    "id": "10001",
+                    "username": "杜甫",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "116",
+                    "ip": "192.168.0.8",
+                    "logins": "108",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10002",
+                    "username": "李白",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "12",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14",
+                    "LAY_CHECKED": true
+                }, {
+                    "id": "10003",
+                    "username": "王勃",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "65",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10004",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "666",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10005",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10006",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "12",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10007",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "16",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }, {
+                    "id": "10008",
+                    "username": "贤心",
+                    "email": "xianxin@layui.com",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "106",
+                    "ip": "192.168.0.8",
+                    "logins": "106",
+                    "joinTime": "2016-10-14"
+                }],
+                even: true,
+                page: true //是否显示分页
+                    //,limits: [5, 7, 10]
+                    //,limit: 5 //每页默认显示的数量
+            });
+            //监听行工具事件
+            table.on('tool(list_table)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+                var data = obj.data //获得当前行数据
+                    ,
+                    layEvent = obj.event; //获得 lay-event 对应的值
+                if (layEvent === 'detail') {
+                    layer.msg('查看操作');
+                } else if (layEvent === 'del') {
+                    layer.confirm('真的删除行么', function(index) {
+                        obj.del(); //删除对应行（tr）的DOM结构
+                        layer.close(index);
+                        //向服务端发送删除指令
+                    });
+                } else if (layEvent === 'edit') {
+                    layer.msg('编辑操作');
+                }
+            });
+
+
+            //日期
+            laydate.render({
+                elem: '#moretime_max'
+            });
+            laydate.render({
+                elem: '#moretime_min'
+            });
+            laydate.render({
+                elem: '#lesstime_min'
+            });
+            laydate.render({
+                elem: '#lesstime_max'
+            });
+
+        });
+    </script>
+</body>
+
+</html>

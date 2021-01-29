@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>标准化网络工作平台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="shortcut icon" href="../images/LOGOicon.png">
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+    <style>
+        body {
+            min-width: 1200px;
+            background: url('../images/bac.png'), no-repeat;
+        }
+        
+        .layui-card {
+            box-shadow: none;
+        }
+        
+        .layui-card-header {
+            text-align: center;
+            font-size: 24px;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: #1A59A9
+        }
+        
+        .layui-form-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .layui-input-block {
+            margin-left: 0;
+        }
+        
+        .layui-input {
+            padding-left: 30px;
+        }
+        
+        .layui-input-block button {
+            width: 100%;
+            background-color: #1A59A9;
+        }
+        
+        .layui-form-item i {
+            position: absolute;
+            font-size: 22px;
+            top: 50%;
+            left: 4px;
+            margin-top: -11px;
+        }
+        
+        .login {
+            position: absolute;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            height: 312px;
+            width: 350px;
+            top: 18%;
+            right: 10%;
+            box-sizing: border-box;
+            padding: 10px 30px;
+        }
+        
+        .btn {
+            padding-top: 40px;
+        }
+        
+        #text {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+        }
+        
+        #text h1 {
+            font-size: 30px;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 50px;
+        }
+        
+        #text div p {
+            font-size: 16px;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: #fff;
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <div class="layui-card">
+            <div class="layui-card-header">用户登陆</div>
+            <div class="layui-card-body">
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <i class="layui-icon">&#xe66f;</i>
+                        <input type="text" name="account" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <i class="layui-icon">&#xe673;</i>
+                        <input type="password" name="password" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item btn">
+                    <div class="layui-input-block">
+                        <button type="button" class="layui-btn" id="login">立即提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="text">
+        <h1>实验室信息管理</h1>
+        <div>
+            <p>探索浩瀚宇宙</p>
+            <p>发展航天事业</p>
+            <p>建设航天强国</p>
+        </div>
+    </div>
+    <script src="../lib/jquery.js"></script>
+    <script src="../lib/layui/layui/layui.js"></script>
+    <script src="../lib/html5shiv.js"></script>
+    <script src="../lib/respond.js"></script>
+    <script>
+        $('#login').click(function() {
+            var data = {
+                "currentPassword": "",
+                "loginName": "",
+                "inputKey": "",
+            }
+            data.loginName = $('input[name="account"]').val()
+            data.currentPassword = $('input[name="password"]').val()
+            jQuery.support.cors = true;
+            $.ajax({
+                type: "post",
+                crossDomain: true,
+                url: "http://192.168.31.224:8701/ump/user/login",
+                headers: {
+                    "content-Type": "application/json;charset=UTF-8",
+                    "Accept": "application/json;charset=UTF-8"
+                },
+                dataType: "json",
+                data: JSON.stringify(
+                    data
+                ),
+                success: function(res) {
+                    if (res) {
+                        if (res.code == 0) {
+                            sessionStorage.setItem('inputKey', res.data.inputKey)
+                            window.location.href = "./index.html"
+                        } else {
+                            alert('用户名或密码错误')
+                        }
+                    }
+                },
+                error: function(error) {
+                    if (error) {
+                        alert('请求失败，请检查网络连接')
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

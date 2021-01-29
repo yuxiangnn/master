@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 20px;
+        }
+        
+        .layui-card-header {
+            font-size: 16px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            background: rgba(250, 250, 250, 1);
+            border: 1px solid rgba(233, 233, 233, 1);
+            color: #010101;
+        }
+        
+        .layui-card-body {
+            background: #fff;
+            border: 1px solid rgba(233, 233, 233, 1);
+            padding: 20px;
+        }
+        
+        .layui-col-space15 {
+            padding: 0 15px;
+        }
+        
+        .layui-form-label {
+            padding: 9px 0;
+        }
+        
+        .layui-btn-group .layui-btn {
+            margin-right: 20px !important;
+        }
+        
+        .find,
+        .reset {
+            width: 80px;
+            height: 35px;
+        }
+        
+        .find {
+            background: #0079fe;
+        }
+        
+        .reset {
+            background: #fff;
+            color: #999;
+            border: 1px solid #eee;
+        }
+        
+        .tableContent {
+            background: #fff;
+            padding: 40px;
+        }
+        
+        .tableContent button {
+            width: 100px;
+            height: 35px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="layui-card">
+        <div class="layui-card-header">管理</div>
+        <form class="layui-card-body">
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3 layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">角色：</label>
+                        <div class="layui-input-block">
+                            <select name="interest" lay-filter="aihao">
+                                  <option value=""></option>
+                                  <option value="0">写作</option>
+                                  <option value="1" selected="">阅读</option>
+                                  <option value="2">游戏</option>
+                                  <option value="3">音乐</option>
+                                  <option value="4">旅行</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3 layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户组：</label>
+                        <div class="layui-input-block">
+                            <select name="interest" lay-filter="aihao">
+                                  <option value=""></option>
+                                  <option value="0">写作</option>
+                                  <option value="1" selected="">阅读</option>
+                                  <option value="2">游戏</option>
+                                  <option value="3">音乐</option>
+                                  <option value="4">旅行</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <div>
+                            <button type="button" class="layui-btn find" lay-verfy="*">查询</button>
+                            <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-md3 layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">单位：</label>
+                        <div class="layui-input-block">
+                            <select name="unit">
+                                  <option value=""></option>
+                                  <option value="0">写作</option>
+                                  <option value="1" selected="">阅读</option>
+                                  <option value="2">游戏</option>
+                                  <option value="3">音乐</option>
+                                  <option value="4">旅行</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3 layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">状态：</label>
+                        <div class="layui-input-block">
+                            <select name="allstate">
+                                      <option value=""></option>
+                                      <option value="0">写作</option>
+                                      <option value="1" selected="">阅读</option>
+                                      <option value="2">游戏</option>
+                                      <option value="3">音乐</option>
+                                      <option value="4">旅行</option>
+                                    </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">时间范围：</label>
+                        <div class="layui-input-block">
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" name="time_from" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" name="time_to" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+        <div class="tableContent">
+            <button type="button" class="layui-btn layui-btn-normal" style="background: #0079fe;">新增</button>
+            <button type="button" class="layui-btn layui-btn-normal" style="background: #f04844;">删除</button>
+            <button type="button" class="layui-btn layui-btn-normal" style="background: #01a79a;">重置密码</button>
+            <button type="button" class="layui-btn layui-btn-primary">同步数据</button>
+            <div class="adduser" style="float: right;">当日新增用户：<span style="color: red;">0</span>人</div>
+            <table class="layui-hide" id="test"></table>
+        </div>
+
+</body>
+<script src="../lib/html5shiv.js"></script>
+<script src="../lib/jquery1.9.1.min.js"></script>
+<script src="../lib/respond.js"></script>
+<script src="../lib/layui/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'table'], function() {
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate,
+            table = layui.table
+
+        table.render({
+            elem: '#test',
+            url: '/demo/table/user/',
+            cellMinWidth: 80,
+            cols: [
+                [{
+                    type: 'checkbox'
+                }, {
+                    field: 'id',
+                    title: '序号',
+                    width: 100,
+                    unresize: true,
+                    // sort: true
+                }, {
+                    field: 'username',
+                    title: '用户名',
+                    templet: '#usernameTpl'
+                }, {
+                    field: 'name',
+                    title: '姓名'
+                }, {
+                    field: 'wealth',
+                    title: '角色',
+                    // minWidth: 120,
+                }, {
+                    field: 'sex',
+                    title: '用户组',
+                    // width: 85,
+                    templet: '#switchTpl',
+                    unresize: true
+                }, {
+                    field: 'sex',
+                    title: '单位',
+                    // width: 85,
+                    templet: '#switchTpl',
+                    unresize: true
+                }, {
+                    field: 'sex',
+                    title: '创建时间',
+                    // width: 85,
+                    templet: '#switchTpl',
+                    unresize: true,
+                    sort: true
+                }, , {
+                    field: 'start',
+                    title: '启用',
+                    width: 90,
+                    templet: '#switchTpl',
+                    unresize: true
+                }, {
+                    field: 'lock',
+                    title: '操作',
+                    width: 110,
+                    templet: '#checkboxTpl',
+                    unresize: true
+                }]
+            ],
+            page: true
+        });
+
+    });
+</script>
+
+</html>

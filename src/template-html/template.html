@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>后台模板</title>
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+    <style>
+        .layui-layout .layui-body {
+            bottom: 0 !important;
+            overflow-y: hidden !important;
+        }
+        
+        .layui-side .layui-nav-item dl dd a {
+            padding-left: 40px;
+        }
+    </style>
+    {{ block 'head' }}
+    <!-- 留一个样式坑，将要留给继承该模板的模板去填坑 -->
+    {{ /block }}
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            {{ include './head.art' }}
+        </div>
+        <div class="content">
+            {{ block 'content' }}
+            <!-- 留一个内容坑，将要留给继承该模板的模板去填坑 -->
+            <!-- 坑里可以有一些默认内容 -->
+            {{ /block }}
+        </div>
+    </div>
+    <script src="./art-template/lib/template-web.js"></script>
+    <script src="../lib/jquery1.9.1.min.js"></script>
+    <script src="../lib/layui/layui/layui.js"></script>
+    <script src="../lib/html5shiv.js"></script>
+    <script src="../lib/respond.js"></script>
+</body>
+
+</html>
